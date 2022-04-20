@@ -13,6 +13,61 @@ app.use(express.static('public'));
 
 //instead:
 
+// mine -old way
+
+// app.get("/", (req, res, next)=>{
+//     res.render("home");
+// });
+
+
+
+// app.get("/about", (req, res, next) => {
+//     res.sendFile(__dirname + '/views/about.html');
+// });
+
+
+// app.get("/contact", (req, res, next) => {
+//     res.sendFile(__dirname + '/views/contact.html');
+// });
+
+// app.get("/rice", (req, res, next) => {
+
+//     const data = {
+//         title: "Rice",
+//         price: 2,
+//         imageFile: "rice.jpg",
+//         stores: ["Online", "Albacete", "Freiburg", "Amsterdam"]
+//     }
+
+//     res.render("product", data);
+// });
+
+// app.get("/chicken", (req, res, next) => {
+//     //res.sendFile(__dirname + '/views/product-chicken.html');
+
+//     const data = {
+//         title: "Chicken",
+//         price: 5,
+//         imageFile: "chicken.jpg"
+//     }
+
+//     res.render("product", data);
+// });
+
+// app.get("/seafood", (req, res, next) => {
+//     //res.sendFile(__dirname + '/views/product-seafood.html');
+
+//     const data = {
+//         title: "Seafood",
+//         price: 10,
+//         imageFile: "seafood.jpg"
+//     }
+
+//     res.render("product", data);
+// });
+
+/* Routes */
+
 /* Routes */
 
 app.get("/", (req, res, next)=>{
@@ -20,15 +75,17 @@ app.get("/", (req, res, next)=>{
 });
 
 
-
 app.get("/about", (req, res, next) => {
-    res.sendFile(__dirname + '/views/about.html');
+    res.render("about");
 });
 
 
 app.get("/contact", (req, res, next) => {
-    res.sendFile(__dirname + '/views/contact.html');
+    res.render("contact");
 });
+
+
+
 
 app.get("/rice", (req, res, next) => {
 
@@ -42,8 +99,8 @@ app.get("/rice", (req, res, next) => {
     res.render("product", data);
 });
 
+
 app.get("/chicken", (req, res, next) => {
-    //res.sendFile(__dirname + '/views/product-chicken.html');
 
     const data = {
         title: "Chicken",
@@ -54,13 +111,12 @@ app.get("/chicken", (req, res, next) => {
     res.render("product", data);
 });
 
+
 app.get("/seafood", (req, res, next) => {
-    //res.sendFile(__dirname + '/views/product-seafood.html');
 
     const data = {
         title: "Seafood",
         price: 10,
-        imageFile: "seafood.jpg"
     }
 
     res.render("product", data);
