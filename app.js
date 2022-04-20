@@ -7,9 +7,18 @@ app.set("view engine", "hbs");
 app.use(express.static('public'));
 
 
+// app.get("/", (req, res, next)=>{
+//     res.sendFile(__dirname + '/views/home.html');
+// });
+
+//instead:
+
+/* Routes */
+
 app.get("/", (req, res, next)=>{
-    res.sendFile(__dirname + '/views/home.html');
+    res.render("home");
 });
+
 
 
 app.get("/about", (req, res, next) => {
