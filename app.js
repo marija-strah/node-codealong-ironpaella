@@ -172,6 +172,7 @@ app.get("/products", (req, res, next) => {
 app.get("/products/:productId", (req, res, next) => {
     Product.findById(req.params.productId)
         .then(productDetails => {
+            console.log(productDetails);
             res.render("product", productDetails);
         })
         .catch(error => console.log("error getting product from DB", error));

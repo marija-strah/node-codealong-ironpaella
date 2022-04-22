@@ -23,6 +23,10 @@ const productSchema = new Schema({
     imgFile: {
         type: String,
         default: "generic-food.jpg"
+    },
+    store: {
+        type: [String],
+        enum: ["online", "germany", "colombia"]
     }
 });
 

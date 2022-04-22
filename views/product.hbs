@@ -1,4 +1,4 @@
-<html lang="en">
+{{!-- <html lang="en">
 
   <head>
     <meta charset="UTF-8" />
@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="./stylesheets/style.css" />
   </head>
 
-  <body>
+  <body> --}}
 
-    <header>
+    {{!-- <header>
       <nav>
         <ul>
           <li>
@@ -25,7 +25,7 @@
           </li>
         </ul>
       </nav>
-    </header>
+    </header> --}}
 
 
     <article class="product"></article>
@@ -39,11 +39,11 @@
 
      <section>
 
-        {{#if stores}}
+        {{#if store}}
             <h5>This product is available in the following stores:</h5>
 
             <ul>
-                {{#each stores}}
+                {{#each store}}
                 <li>
                     {{this}}
                     <a href="#">More Details</a>
@@ -58,6 +58,6 @@
     </section>
     </article>
 
-  </body>
+  {{!-- </body>
 
-</html>
+</html> --}}

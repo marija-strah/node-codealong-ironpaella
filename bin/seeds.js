@@ -21,11 +21,13 @@ const products = [
         title: "Rice",
         price: 2,
         imgFile: "rice.jpg",
+        store: ["online", "germany"]
     },
     {
         title: "Chicken",
         price: 5,
-        imgFile: "chicken.jpg"
+        imgFile: "chicken.jpg",
+        store: ["online"]
     },
     {
         title: "Seafood",
