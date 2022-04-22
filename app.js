@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const Product = require('./models/Product.model');
 const app = express();
 
@@ -7,6 +8,7 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "hbs");
 
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 mongoose
@@ -208,6 +210,26 @@ app.get("/products/:productId", (req, res, next) => {
 //     })
 //     .catch(error => console.log("error filtering", error));
 // })
+
+
+app.post("/new", (req, res, next) => {
+    // console.log("creating new productss...");
+    // console.log(req.body);
+
+
+    const newProduct = {    // prevent users from adding fields manually
+        title: req.body.title,
+        price: req.body.price
+    };
+
+    Product.create(newProduct)      //returns a promise
+    .then( newProduct => {
+        console.log("new product was created");
+        console.log(newProduct);
+        res.redirect("/products"); //redirect to the products page
+    })
+    .catch(error => console.log("error creating a new product", error));
+})
 
 
 app.listen(3001, () => {
