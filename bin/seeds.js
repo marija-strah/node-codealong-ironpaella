@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 const Product = require("../models/Product.model");
+const express = require('express');
+const app = express();
 
+app.set("views", __dirname + "/views");
+app.set("view engine", "hbs");
+
+app.use(express.static('public'));
+
+// connect to DB
 mongoose
   .connect('mongodb://localhost/ironborn-ecommerce')
   .then(x => {

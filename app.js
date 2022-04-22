@@ -79,8 +79,6 @@ mongoose
 
 /* Routes */
 
-/* Routes */
-
 app.get("/", (req, res, next)=>{
     res.render("home");
 });
@@ -99,65 +97,85 @@ app.get("/contact", (req, res, next) => {
 
 
 
-app.get("/rice", (req, res, next) => {
+//lines 103 to 160 are redone better with route params in line 165
+// app.get("/rice", (req, res, next) => {
 
 
-    // The title is in uppercase in the database?
-    // 
-    Product.findOne({title: 'Rice'})
-    .then( (productDetails) => {       // productDetails is an obj
-        console.log(productDetails);
-        res.render("product", productDetails)   // send as 2nd argument
-    })
-    .catch(error => console.log(error));
+//     // The title is in uppercase in the database?
+//     // 
+//     Product.findOne({title: 'Rice'})
+//     .then( (productDetails) => {       // productDetails is an obj
+//         console.log(productDetails);
+//         res.render("product", productDetails)   // send as 2nd argument
+//     })
+//     .catch(error => console.log(error));
 
-    // const data = {
-    //     title: "Rice",
-    //     price: 2,
-    //     imageFile: "rice.jpg",
-    //     stores: ["Online", "Albacete", "Freiburg", "Amsterdam"]
-    // }
+//     // const data = {
+//     //     title: "Rice",
+//     //     price: 2,
+//     //     imageFile: "rice.jpg",
+//     //     stores: ["Online", "Albacete", "Freiburg", "Amsterdam"]
+//     // }
 
-    // res.render("product", data); // send to then above in a function bc jas wont wait for reponse, async
-});
+//     // res.render("product", data); // send to then above in a function bc jas wont wait for reponse, async
+// });
 
 
-app.get("/chicken", (req, res, next) => {
+// app.get("/chicken", (req, res, next) => {
 
-    // const data = {
-    //     title: "Chicken",
-    //     price: 5,
-    //     imageFile: "chicken.jpg"
-    // }
+//     // const data = {
+//     //     title: "Chicken",
+//     //     price: 5,
+//     //     imageFile: "chicken.jpg"
+//     // }
 
-    // res.render("product", data);
+//     // res.render("product", data);
 
-    Product.findOne({title: 'Chicken'})
-.then ((productDetails) => {
-console.log(productDetails);
-res.render("product", productDetails)
+//     Product.findOne({title: 'Chicken'})
+// .then ((productDetails) => {
+// console.log(productDetails);
+// res.render("product", productDetails)
+// })
+// .catch(error => console.log(error))
+// });
+
+
+// app.get("/seafood", (req, res, next) => {
+
+//     // const data = {
+//     //     title: "Seafood",
+//     //     price: 10,
+//     // }
+
+//     // res.render("product", data);
+
+//     Product.findOne({title: 'Seafood'})
+// .then ((productDetails) => {
+// console.log(productDetails);
+// res.render("product", productDetails)
+// })
+// .catch(error => console.log(error))
+// });
+
+app.get("/products", (req, res, next) => {
+
+    Product.find()
+        .then( productsArr => {
+            res.render("productList", {products: productsArr})
+        })
+        .catch( error => console.log("error getting products from DB", error) );
+
 })
-.catch(error => console.log(error))
-});
 
+// route params
 
-app.get("/seafood", (req, res, next) => {
-
-    // const data = {
-    //     title: "Seafood",
-    //     price: 10,
-    // }
-
-    // res.render("product", data);
-
-    Product.findOne({title: 'Seafood'})
-.then ((productDetails) => {
-console.log(productDetails);
-res.render("product", productDetails)
+app.get("/products/:productId", (req, res, next) => {
+    Product.findById(req.params.productId)
+        .then(productDetails => {
+            res.render("product", productDetails);
+        })
+        .catch(error => console.log("error getting product from DB", error));
 })
-.catch(error => console.log(error))
-});
-
 
 app.listen(3001, () => {
     console.log("server listening to requests...")
