@@ -159,8 +159,26 @@ app.get("/contact", (req, res, next) => {
 
 app.get("/products", (req, res, next) => {
 
-    Product.find()
+    //const max = req.query.maxPrice;
+    // variable max comes from req query
+
+
+    let filter;
+    const max = req.query.maxPrice;
+    
+    if(max === undefined){
+        filter = {};
+    } else {
+        filter = {price: {$lte: max} };
+    }
+
+
+    Product.find(filter)
         .then( productsArr => {
+
+            // alternative - avoid bc could produce long arrays
+            // const newArr = productsArr.filter(product => product.price < max);
+
             res.render("productList", {products: productsArr})
         })
         .catch( error => console.log("error getting products from DB", error) );
@@ -177,6 +195,20 @@ app.get("/products/:productId", (req, res, next) => {
         })
         .catch(error => console.log("error getting product from DB", error));
 })
+
+
+//my try:
+// app.get("/products", (req, res, next) => {
+//     Product.findById(req.query.price)
+//     .then(filterPrice => {
+//         if (filterPrice < 2) {
+//         console.log(filterPrice);
+//         res.render("product", filterPrice)
+//     }
+//     })
+//     .catch(error => console.log("error filtering", error));
+// })
+
 
 app.listen(3001, () => {
     console.log("server listening to requests...")
